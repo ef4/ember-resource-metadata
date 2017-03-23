@@ -9,7 +9,7 @@ moduleForComponent('meta-for-resource', 'Integration | Helper | meta for resourc
     this.register('model:example', DS.Model.extend({
       title: DS.attr('string')
     }));
-    this.inject.service('ember-resource-metadata', { as: 'metadata' });
+    this.inject.service('resource-metadata', { as: 'metadata' });
     this.inject.service('store');
     this.set('model', this.get('store').createRecord('example', { title: 'hello' }));
   }

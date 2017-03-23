@@ -21,7 +21,7 @@ export default Serializer.extend({});
 
 ## Service
 
-The `ember-resource-metadata` service has the following methods for accessing metadata:
+The `resource-metadata` service has the following methods for accessing metadata:
 
  - `peek(record)`: takes an Ember Data record or any object with a `type` and `id`. Returns an `Ember.Object` representing the record's metadata. Returns undefined if we don't have any metadata for the record.
  - `read(record)`: takes the same input as `peek`, but this always returns an `Ember.Object`, which will be updated to contain the metadata for the record even if it's added at a later time.
@@ -31,10 +31,10 @@ The `ember-resource-metadata` service has the following methods for accessing me
  
  ```js
  export default Ember.Component.extend({
-   emberResourceMetadata: Ember.inject.service(),
+   resourceMetadata: Ember.inject.service(),
    actions: {
      bumpVersion() {
-       let service = this.get('emberResourceMetadata');
+       let service = this.get(resourceMetadata');
        let model = this.get('model');
        let meta = service.read(model);
        service.write(model, { version: meta.version + 1 }

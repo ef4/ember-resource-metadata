@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('service:ember-resource-metadata', 'Unit | Service | ember resource metadata', {
+moduleFor('service:resource-metadata', 'Unit | Service | resource metadata', {
   // Specify the other units that are required for this test.
   // needs: ['service:foo']
 });

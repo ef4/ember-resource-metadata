@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Helper.extend({
-  _emberResourceMetadata: Ember.inject.service('ember-resource-metadata'),
+  resourceMetadata: Ember.inject.service(),
   compute([thing]) {
-    return this.get('_emberResourceMetadata').read(thing);
+    return this.get('resourceMetadata').read(thing);
   }
 });
