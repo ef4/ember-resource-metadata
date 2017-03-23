@@ -1,8 +1,8 @@
-/* global WeakMap */
 import Ember from 'ember';
 import {
   extractIdentityKey,
-  lookupIdentityKey
+  lookupIdentityKey,
+  WeakMap
 } from '../private-api';
 
 export default Ember.Service.extend({
