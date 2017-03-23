@@ -1,17 +1,21 @@
 {
   "name": "ember-resource-metadata",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Per-resource metadata for ember-data",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "ember-data",
+    "jsonapi",
+    "meta",
+    "metadata"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Edward Faulkner <edward@eaf4.com>",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/ef4/ember-resource-metadata",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
