@@ -34,7 +34,7 @@ The `resource-metadata` service has the following methods for accessing metadata
    resourceMetadata: Ember.inject.service(),
    actions: {
      bumpVersion() {
-       let service = this.get(resourceMetadata);
+       let service = this.get('resourceMetadata');
        let model = this.get('model');
        let meta = service.read(model);
        service.write(model, { version: meta.version + 1 });
