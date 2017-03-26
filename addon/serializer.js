@@ -16,7 +16,7 @@ export default JSONAPISerializer.extend({
     let service = this.get('_resourceMetadata');
     let meta = service.peek(snapshot);
     if (meta) {
-      json.data.meta = Object.assign({}, json.data.meta, meta);
+      json.data.meta = Ember.assign({}, json.data.meta, meta);
     }
     return json;
   }
