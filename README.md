@@ -1,6 +1,6 @@
 # ember-resource-metadata
 
-The [JSONAPI spec](http://jsonapi.org/) allows any resource to have its own `meta` object. Ember Data doesn't support `meta` in this position. This addon existst to fill the gap.
+The [JSONAPI spec](http://jsonapi.org/) allows any resource to have its own `meta` object. Ember Data doesn't support `meta` in this position. This addon exists to fill the gap.
 
 It provides a `Serializer`, a `Service`, and a `Helper` as described in the following sections:
 
@@ -34,10 +34,10 @@ The `resource-metadata` service has the following methods for accessing metadata
    resourceMetadata: Ember.inject.service(),
    actions: {
      bumpVersion() {
-       let service = this.get(resourceMetadata');
+       let service = this.get('resourceMetadata');
        let model = this.get('model');
        let meta = service.read(model);
-       service.write(model, { version: meta.version + 1 }
+       service.write(model, { version: meta.version + 1 });
      }
    }
  })
