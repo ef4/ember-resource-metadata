@@ -31,9 +31,9 @@ export default DS.JSONAPIAdapter.extend({
     });
   },
 
-  findRecord(store, type, snapshot) {
+  findRecord(store, type, id, snapshot) {
     return this._correlateMetadata(snapshot.record, () => {
-      return this._super(store, type, snapshot);
+      return this._super(store, type, id, snapshot);
     });
   },
 
