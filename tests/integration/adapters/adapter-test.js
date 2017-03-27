@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import DS from 'ember-data';
 import RSVP from 'rsvp';
-import Adapter from 'ember-resource-metadata/adapter';
+import AdapterMixin from 'ember-resource-metadata/adapter-mixin';
 
 let answers;
 let requests;
@@ -14,7 +14,7 @@ moduleForComponent('adapter', 'Integration | Adapter | adapter', {
     this.register('model:example', DS.Model.extend({
       title: DS.attr('string')
     }));
-    this.register('adapter:example', Adapter.extend({
+    this.register('adapter:example', DS.JSONAPIAdapter.extend(AdapterMixin, {
       ajax(url, type, options) {
         requests.push({ url, type, options });
         return RSVP.resolve(answers.shift());

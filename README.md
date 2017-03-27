@@ -2,15 +2,16 @@
 
 The [JSONAPI spec](http://jsonapi.org/) allows any resource to have its own `meta` object. Ember Data doesn't support `meta` in this position. This addon exists to fill the gap.
 
-It provides an `Adapter`, a `Serializer`, a `Service`, and a `Helper` as described in the following sections:
+It provides an `AdapterMixin`, a `SerializerMixin`, a `Service`, and a `Helper` as described in the following sections:
 
-## Adapter
+## AdapterMixin
 
-We provide an extended version of Ember Data's `JSONAPIAdapter` that stores per-resource metadata into a service. To use it, extend your own Adapters off it like:
+We provide a mixin that you can apply to Ember Data's `JSONAPIAdapter` that stores per-resource metadata into a service. Use it like:
 
 ```js
-import Adapter from 'ember-resource-metadata/adapter;
-export default Adapter.extend();
+import AdapterMixin from 'ember-resource-metadata/adapter-mixin;
+import DS from 'ember-data';
+export default DS.JSONAPIAdapter.extend(AdapterMixin);
 ```
 
 It expects to receive JSONAPI-compliant responses from the server (because it will expect to find `/data/id`, `/data/type`, and `/data/meta` in the response).
@@ -39,15 +40,16 @@ The `resource-metadata` service has the following methods for accessing metadata
  })
  ```
 
-## Serializer
+## SerializerMixin
 
-We provide an extended version of Ember Data's `JSONAPISerializer` that writes per-resource metadata back out to the server.
+We provide a mixin that you can apply to Ember Data's `JSONAPISerializer` that writes per-resource metadata back out to the server.
 
-To use it, extend your own serializers off of it like:
+Use it like:
 
 ```js
-import Serializer from 'ember-resource-metadata/serializer';
-export default Serializer.extend();
+import SerializerMixin from 'ember-resource-metadata/serializer-mixin';
+import DS from 'ember-data';
+export default DS.JSONAPISerializer.extend(SerializerMixin);
 
 ```
 

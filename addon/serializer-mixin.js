@@ -1,7 +1,6 @@
-import JSONAPISerializer from 'ember-data/serializers/json-api';
 import Ember from 'ember';
 
-export default JSONAPISerializer.extend({
+export default Ember.Mixin.create({
   _resourceMetadata: Ember.inject.service('resource-metadata'),
   serialize(snapshot, options) {
     let json = this._super(snapshot, options);
