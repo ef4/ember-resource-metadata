@@ -77,6 +77,24 @@ test('it sets meta when loading a record for the first time via queryRecord', fu
   });
 });
 
+test('it sets meta when loading a record for the first time via query', function(assert) {
+  answers.push({
+    data: [{
+      type: 'examples',
+      id: 1,
+      meta: {
+        something: 42
+      }
+    }]
+  });
+  return RSVP.resolve().then(() => {
+    return this.get('store').query('example', {});
+  }).then(records => {
+    assert.equal(this.get('metadata').read(records.get('firstObject')).get('something'), 42);
+  });
+});
+
+
 test('it updates meta when a record is updated', function(assert) {
   answers.push({
     data: {

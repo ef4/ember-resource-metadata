@@ -6,17 +6,24 @@ export default DS.JSONAPIAdapter.extend({
 
   _correlateMetadata(record, fn) {
     return fn().then(response => {
-      if (response.data.meta) {
-        let service = this.get('_resourceMetadata');
-        if (record) {
-          service.write(record, response.data.meta);
-        } else {
-          service.write({ id: response.data.id, type: response.data.type }, response.data.meta);
-        }
+      if (Array.isArray(response.data)) {
+        response.data.forEach(hash => this._correlateResource(record, hash));
+      } else {
+        this._correlateResource(record, response.data);
       }
       return response;
     });
+  },
 
+  _correlateResource(record, hash) {
+    if (hash.meta) {
+      let service = this.get('_resourceMetadata');
+      if (record) {
+        service.write(record, hash.meta);
+      } else {
+        service.write({ id: hash.id, type: hash.type }, hash.meta);
+      }
+    }
   },
 
   createRecord(store, type, snapshot) {
@@ -41,5 +48,12 @@ export default DS.JSONAPIAdapter.extend({
     return this._correlateMetadata(null, () => {
       return this._super(store, type, query);
     });
+  },
+
+  query(store, type, query) {
+    return this._correlateMetadata(null, () => {
+      return this._super(store, type, query);
+    });
   }
+
 })
