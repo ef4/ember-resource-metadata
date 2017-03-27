@@ -3,12 +3,14 @@ import DS from 'ember-data';
 import RSVP from 'rsvp';
 import Adapter from 'ember-resource-metadata/adapter';
 
-let answers = [];
-let requests = [];
+let answers;
+let requests;
 
 moduleForComponent('adapter', 'Integration | Adapter | adapter', {
   integration: true,
   beforeEach() {
+    answers = [];
+    requests = [];
     this.register('model:example', DS.Model.extend({
       title: DS.attr('string')
     }));
