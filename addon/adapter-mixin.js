@@ -44,6 +44,11 @@ export default Ember.Mixin.create({
   },
 
   queryRecord(store, type, query) {
+    if (query.disableResourceMetadata) {
+      query = Object.assign({}, query);
+      delete query.disableResourceMetadata;
+      return this._super(store, type, query);
+    }
     return this._correlateMetadata(null, () => {
       return this._super(store, type, query);
     });
