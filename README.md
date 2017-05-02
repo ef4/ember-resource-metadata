@@ -9,7 +9,7 @@ It provides an `AdapterMixin`, a `SerializerMixin`, a `Service`, and a `Helper` 
 We provide a mixin that you can apply to Ember Data's `JSONAPIAdapter` that stores per-resource metadata into a service. Use it like:
 
 ```js
-import AdapterMixin from 'ember-resource-metadata/adapter-mixin;
+import AdapterMixin from 'ember-resource-metadata/adapter-mixin';
 import DS from 'ember-data';
 export default DS.JSONAPIAdapter.extend(AdapterMixin);
 ```
