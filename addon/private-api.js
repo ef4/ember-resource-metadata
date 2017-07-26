@@ -4,8 +4,10 @@
 */
 
 import Ember from 'ember';
-import normalizeModelName from "ember-data/-private/system/normalize-model-name";
+import DS from 'ember-data';
 import { singularize } from 'ember-inflector';
+
+const { normalizeModelName } = DS;
 
 export function lookupIdentityKey(store, type, id) {
   return store._internalModelForId(singularize(normalizeModelName(type)), id);
