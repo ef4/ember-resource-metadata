@@ -21,5 +21,10 @@ export let WeakMap;
 if (window.WeakMap) {
   WeakMap = window.WeakMap;
 } else {
-  WeakMap = Ember.__loader.require('ember-metal/weak_map').default;
+  let metal = Ember.__loader.require('ember-metal');
+  if (metal.WeakMap) {
+    WeakMap = metal.WeakMap;
+  } else {
+    WeakMap = Ember.__loader.require('ember-metal/weak_map').default;
+  }
 }
