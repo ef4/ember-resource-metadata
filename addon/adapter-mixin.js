@@ -6,10 +6,10 @@ export default Mixin.create({
 
   _correlateMetadata(record, fn) {
     return fn().then(response => {
-      if (Array.isArray(response.data)) {
-        response.data.forEach(hash => this._correlateResource(record, hash));
-      } else {
-        this._correlateResource(record, response.data);
+      let { data, included } = response;
+      this._correlatePayload(data, record);
+      if (included) {
+        this._correlatePayload(included, record);
       }
       return response;
     });
@@ -23,6 +23,14 @@ export default Mixin.create({
       } else {
         service.write({ id: hash.id, type: hash.type }, hash.meta);
       }
+    }
+  },
+
+  _correlatePayload(data, record) {
+    if (Array.isArray(data)) {
+      data.forEach(hash => this._correlateResource(null, hash));
+    } else {
+      this._correlateResource(record, data);
     }
   },
 
