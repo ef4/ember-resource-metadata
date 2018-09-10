@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
-  _resourceMetadata: Ember.inject.service('resource-metadata'),
+export default Mixin.create({
+  _resourceMetadata: service('resource-metadata'),
 
   _correlateMetadata(record, fn) {
     return fn().then(response => {
