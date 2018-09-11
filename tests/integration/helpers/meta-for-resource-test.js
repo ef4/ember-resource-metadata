@@ -1,7 +1,7 @@
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import DS from 'ember-data';
-import Ember from 'ember';
 
 moduleForComponent('meta-for-resource', 'Integration | Helper | meta for resource', {
   integration: true,
@@ -26,7 +26,7 @@ test('it works when meta is set later', function(assert) {
 
   assert.equal(this.$('.output').text(), '');
 
-  Ember.run(() => {
+  run(() => {
     this.get('metadata').write(this.get('model'), { someMetaKey: 42 });
   });
 

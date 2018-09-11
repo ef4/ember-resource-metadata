@@ -12,7 +12,11 @@ moduleForComponent('adapter', 'Integration | Adapter | adapter', {
     answers = [];
     requests = [];
     this.register('model:example', DS.Model.extend({
-      title: DS.attr('string')
+      title: DS.attr('string'),
+      references: DS.hasMany('references', { async: false })
+    }));
+    this.register('model:reference', DS.Model.extend({
+      source: DS.attr('string')
     }));
     this.register('adapter:example', DS.JSONAPIAdapter.extend(AdapterMixin, {
       ajax(url, type, options) {
@@ -139,5 +143,40 @@ test('it updates meta when a record is created', function(assert) {
     return record.save();
   }).then(record => {
     assert.equal(this.get('metadata').read(record).get('something'), 43);
+  });
+});
+
+test('it sets meta in included records', function(assert) {
+  answers.push({
+    data: {
+      type: 'examples',
+      id: 1,
+      meta: {
+        something: 42
+      }
+    },
+    included: [
+      {
+        id: 1,
+        type: 'references',
+        meta: {
+          something: 24
+        }
+      },
+      {
+        id: 2,
+        type: 'references',
+        meta: {
+          something: 20
+        }
+      },
+    ]
+  });
+  return RSVP.resolve().then(() => {
+    return this.get('store').findRecord('example', 1);
+  }).then(record => {
+    assert.equal(this.get('metadata').read(record).get('something'), 42);
+    assert.equal(this.get('metadata').read({ id: 1, type: 'reference' }).get('something'), 24);
+    assert.equal(this.get('metadata').read({ id: 2, type: 'reference' }).get('something'), 20);
   });
 });

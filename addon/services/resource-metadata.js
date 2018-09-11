@@ -1,12 +1,13 @@
-import Ember from 'ember';
+import EmberObject, { get, setProperties } from '@ember/object';
+import Service, { inject as service } from '@ember/service';
 import {
   extractIdentityKey,
   lookupIdentityKey,
   WeakMap
 } from '../private-api';
 
-export default Ember.Service.extend({
-  store: Ember.inject.service(),
+export default Service.extend({
+  store: service(),
 
   init() {
     this._super();
@@ -16,8 +17,8 @@ export default Ember.Service.extend({
   _identityFor(thing) {
     let identity = extractIdentityKey(thing);
     if (!identity) {
-      let type = Ember.get(thing, 'type');
-      let id = Ember.get(thing, 'id');
+      let type = get(thing, 'type');
+      let id = get(thing, 'id');
       identity = lookupIdentityKey(this.get('store'), type, id);
     }
     return identity;
@@ -27,9 +28,9 @@ export default Ember.Service.extend({
     let identity = this._identityFor(thing);
     let existing = this.metastore.get(identity);
     if (existing) {
-      Ember.setProperties(existing, metadata);
+      setProperties(existing, metadata);
     } else {
-      this.metastore.set(identity, Ember.Object.create(metadata));
+      this.metastore.set(identity, EmberObject.create(metadata));
     }
   },
 
@@ -37,7 +38,7 @@ export default Ember.Service.extend({
     let identity = this._identityFor(thing);
     let meta = this.metastore.get(identity);
     if (!meta) {
-      meta = Ember.Object.create();
+      meta = EmberObject.create();
       this.metastore.set(identity, meta);
     }
     return meta;
