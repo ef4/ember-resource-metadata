@@ -1,6 +1,6 @@
 {
   "name": "ember-resource-metadata",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Per-resource metadata for ember-data",
   "keywords": [
     "ember-addon",
