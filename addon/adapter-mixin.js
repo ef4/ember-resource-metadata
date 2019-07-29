@@ -6,7 +6,7 @@ export default Mixin.create({
 
   _correlateMetadata(record, fn) {
     return fn().then(response => {
-      let { data, included } = response;
+      let { data, included } = response || {};
       this._correlatePayload(data, record);
       if (included) {
         this._correlatePayload(included, record);
@@ -15,7 +15,7 @@ export default Mixin.create({
     });
   },
 
-  _correlateResource(record, hash) {
+  _correlateResource(record, hash = {}) {
     if (hash.meta) {
       let service = this.get('_resourceMetadata');
       if (record) {

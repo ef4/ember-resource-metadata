@@ -180,3 +180,24 @@ test('it sets meta in included records', function(assert) {
     assert.equal(this.get('metadata').read({ id: 2, type: 'reference' }).get('something'), 20);
   });
 });
+
+test('it supports empty responses', function(assert) {
+  const EMPTY_SAVE_RECORD_RESPONSE = '';
+
+  answers.push({
+    data: {
+      type: 'examples',
+      id: 1
+    }
+  });
+
+  answers.push(EMPTY_SAVE_RECORD_RESPONSE);
+
+  return RSVP.resolve().then(() => {
+    return this.get('store').findRecord('example', 1);
+  }).then(record => {
+    return record.save();
+  }).then(record => {
+    assert.ok(record);
+  });
+});
