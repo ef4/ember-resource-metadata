@@ -20,18 +20,18 @@ module('Integration | Helper | meta for resource', function(hooks) {
   test('it works when meta already exists', async function(assert) {
     this.get('metadata').write(this.get('model'), { someMetaKey: 42 });
     await render(hbs`<div class="output">{{get (meta-for-resource model) 'someMetaKey'}}</div>`);
-    assert.equal(find('.output').text(), '42');
+    assert.equal(find('.output').textContent.trim(), '42');
   });
 
   test('it works when meta is set later', async function(assert) {
     await render(hbs`<div class="output">{{get (meta-for-resource model) 'someMetaKey'}}</div>`);
 
-    assert.equal(find('.output').text(), '');
+    assert.equal(find('.output').textContent.trim(), '');
 
     run(() => {
       this.get('metadata').write(this.get('model'), { someMetaKey: 42 });
     });
 
-    assert.equal(find('.output').text(), '42');
+    assert.equal(find('.output').textContent.trim(), '42');
   });
 });
