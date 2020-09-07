@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-resource-metadata'
+  name: require('./package').name
 };
