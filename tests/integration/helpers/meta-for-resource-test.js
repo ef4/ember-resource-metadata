@@ -1,16 +1,16 @@
+import Model, { attr } from '@ember-data/model';
 import { run } from '@ember/runloop';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { find, render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import DS from 'ember-data';
 
 module('Integration | Helper | meta for resource', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
-    this.owner.register('model:example', DS.Model.extend({
-      title: DS.attr('string')
+    this.owner.register('model:example', Model.extend({
+      title: attr('string')
     }));
     this.metadata = this.owner.lookup('service:resource-metadata');
     this.store = this.owner.lookup('service:store');

@@ -3,11 +3,10 @@
   private APIs that are needed to make this addon function
 */
 
-import Ember from 'ember';
-import DS from 'ember-data';
-import { singularize } from 'ember-inflector';
+import { normalizeModelName } from '@ember-data/store';
 
-const { normalizeModelName } = DS;
+import Ember from 'ember';
+import { singularize } from 'ember-inflector';
 
 export function lookupIdentityKey(store, type, id) {
   return store._internalModelForId(singularize(normalizeModelName(type)), id);

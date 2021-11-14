@@ -1,7 +1,9 @@
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
+import JSONAPISerializer from '@ember-data/serializer/json-api';
+import Model, { attr, hasMany } from '@ember-data/model';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import '@ember/test-helpers';
-import DS from 'ember-data';
 import RSVP from 'rsvp';
 import AdapterMixin from 'ember-resource-metadata/adapter-mixin';
 
@@ -14,14 +16,15 @@ module('Integration | Adapter | adapter', function(hooks) {
   hooks.beforeEach(function() {
     answers = [];
     requests = [];
-    this.owner.register('model:example', DS.Model.extend({
-      title: DS.attr('string'),
-      references: DS.hasMany('references', { async: false })
+    this.owner.register('serializer:application', JSONAPISerializer);
+    this.owner.register('model:example', Model.extend({
+      title: attr('string'),
+      references: hasMany('references', { async: false })
     }));
-    this.owner.register('model:reference', DS.Model.extend({
-      source: DS.attr('string')
+    this.owner.register('model:reference', Model.extend({
+      source: attr('string')
     }));
-    this.owner.register('adapter:example', DS.JSONAPIAdapter.extend(AdapterMixin, {
+    this.owner.register('adapter:example', JSONAPIAdapter.extend(AdapterMixin, {
       ajax(url, type, options) {
         requests.push({ url, type, options });
         return RSVP.resolve(answers.shift());
