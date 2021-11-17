@@ -67,6 +67,17 @@ export default Mixin.create({
     return this._correlateMetadata(null, () => {
       return this._super(store, type, query);
     });
-  }
+  },
 
+  findHasMany(store, snapshot, url, relationship) {
+    return this._correlateMetadata(null, () => {
+      return this._super(store, snapshot, url, relationship);
+    });
+  },
+  
+  findBelongsTo(store, snapshot, url, relationship) {
+    return this._correlateMetadata(null, () => {
+      return this._super(store, snapshot, url, relationship);
+    });
+  }
 })
